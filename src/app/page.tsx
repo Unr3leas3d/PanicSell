@@ -122,14 +122,17 @@ export default function Home() {
                     >
                         PANIC SELL
                     </motion.h1>
-                    <p className="text-center text-red-300 text-lg md:text-xl font-mono uppercase tracking-widest bg-red-950/20 px-4 py-1 rounded-full border border-red-900/30">
-                        Liquidate everything. Save yourself.
+                    <p className="text-center text-red-300 text-sm md:text-base font-mono uppercase tracking-[0.2em] bg-red-950/20 px-6 py-2 rounded-full border border-red-900/30">
+                        The Ultimate Solana Liquidation Tool
                     </p>
                 </div>
 
                 {/* Main Action Section */}
                 <div className="border border-red-900/50 rounded-2xl p-6 md:p-8 bg-red-950/20 w-full flex flex-col items-center gap-6 backdrop-blur-sm">
-                    <div className="w-full flex justify-center">
+                    <div className="w-full flex flex-col items-center gap-4">
+                        <p className="text-xs text-red-400/60 uppercase tracking-widest font-mono">
+                            Connect your Solana wallet to begin
+                        </p>
                         <WalletMultiButton style={{ backgroundColor: '#ef4444', borderRadius: '12px', height: '50px', padding: '0 24px' }} />
                     </div>
 
@@ -170,7 +173,7 @@ export default function Home() {
                 {/* Risk Assessment: Asset List Section */}
                 <div className="w-full bg-zinc-900/50 rounded-2xl overflow-hidden border border-zinc-800 backdrop-blur-sm mb-12">
                     <div className="p-4 border-b border-zinc-800 text-[10px] uppercase tracking-[0.2em] text-zinc-500 flex justify-between font-bold bg-zinc-900/80">
-                        <span>Risk Assessment: Your Bags</span>
+                        <span>Solana Risk Assessment: Your Bags</span>
                         <span>{assets.length} items detected</span>
                     </div>
                     <div className="p-2">
