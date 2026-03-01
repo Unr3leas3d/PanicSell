@@ -26,7 +26,7 @@ export default function AssetList({ assets, loading }: AssetListProps) {
     }
 
     return (
-        <div className="w-full flex flex-col gap-2 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+        <div className="w-full flex flex-col gap-2 max-h-[500px] lg:max-h-[700px] overflow-y-auto pr-2 custom-scrollbar">
             {assets.map((asset) => (
                 <div
                     key={asset.id}

@@ -103,9 +103,10 @@ export default function Home() {
     if (!mounted) return null;
 
     return (
-        <main className="flex min-h-screen flex-col items-center justify-center p-4 bg-zinc-950 text-white">
-            <div className="z-10 w-full max-w-md items-center justify-between font-mono text-sm">
-                <div className="flex flex-col items-center gap-6">
+        <main className="flex min-h-screen flex-col items-center bg-zinc-950 text-white p-4 md:p-8">
+            <div className="z-10 w-full max-w-2xl flex flex-col items-center gap-8 mt-8">
+                {/* Header Section */}
+                <div className="flex flex-col items-center gap-4">
                     <motion.h1
                         animate={{
                             x: [-2, 2, -2, 2, 0],
@@ -117,56 +118,62 @@ export default function Home() {
                             repeat: Infinity,
                             repeatType: "mirror"
                         }}
-                        className="text-4xl font-black tracking-tighter text-center text-red-500 drop-shadow-[0_0_15px_rgba(239,68,68,0.8)]"
+                        className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-center text-red-500 drop-shadow-[0_0_20px_rgba(239,68,68,0.8)]"
                     >
                         PANIC SELL
                     </motion.h1>
-                    <p className="text-center text-red-300">
+                    <p className="text-center text-red-300 text-lg md:text-xl font-mono uppercase tracking-widest bg-red-950/20 px-4 py-1 rounded-full border border-red-900/30">
                         Liquidate everything. Save yourself.
                     </p>
+                </div>
 
-                    <div className="border border-red-900/50 rounded-xl p-6 bg-red-950/20 w-full flex flex-col items-center gap-4">
-                        <WalletMultiButton style={{ backgroundColor: '#ef4444' }} />
-
-                        {publicKey && (
-                            <div className="w-full flex flex-col items-center mt-4 gap-4">
-                                <div className="text-center">
-                                    <div className="text-sm text-red-300/80 uppercase tracking-widest mb-1">Total Liquidation Value</div>
-                                    <div className="text-5xl font-black text-red-500 tracking-tighter shadow-red-500/50 drop-shadow-md">
-                                        {valuing ? "..." : `$${totalValue.toFixed(2)}`}
-                                    </div>
-                                </div>
-
-                                <div className="flex items-center gap-3 bg-red-900/30 px-4 py-2 rounded-lg border border-red-900/50 mt-2">
-                                    <label className="text-sm text-red-200 cursor-pointer" htmlFor="dump-sol">
-                                        Dump SOL too? ({(solBalance / LAMPORTS_PER_SOL).toFixed(4)} SOL)
-                                    </label>
-                                    <Switch.Root
-                                        id="dump-sol"
-                                        checked={dumpSol}
-                                        onCheckedChange={setDumpSol}
-                                        className="w-[42px] h-[25px] bg-red-950 rounded-full relative shadow-[0_2px_10px] shadow-black/50 focus:shadow-[0_0_0_2px] focus:shadow-red-500 data-[state=checked]:bg-red-500 outline-none cursor-pointer border border-red-900"
-                                    >
-                                        <Switch.Thumb className="block w-[21px] h-[21px] bg-white rounded-full shadow-[0_2px_2px] shadow-black/50 transition-transform duration-100 translate-x-0.5 will-change-transform data-[state=checked]:translate-x-[19px]" />
-                                    </Switch.Root>
-                                </div>
-
-                                <PanicControl
-                                    assets={assets}
-                                    dumpSol={dumpSol}
-                                    quotes={rawQuotes}
-                                    totalValue={totalValue}
-                                    onComplete={() => fetchData(publicKey.toBase58())}
-                                />
-                            </div>
-                        )}
+                {/* Main Action Section */}
+                <div className="border border-red-900/50 rounded-2xl p-6 md:p-8 bg-red-950/20 w-full flex flex-col items-center gap-6 backdrop-blur-sm">
+                    <div className="w-full flex justify-center">
+                        <WalletMultiButton style={{ backgroundColor: '#ef4444', borderRadius: '12px', height: '50px', padding: '0 24px' }} />
                     </div>
 
-                    <div className="w-full bg-zinc-900 rounded-lg p-1 border border-zinc-800">
-                        <div className="p-3 border-b border-zinc-800 text-[10px] uppercase tracking-widest text-zinc-500 flex justify-between">
-                            <span>Your Bags</span>
-                            <span>{assets.length} items</span>
+                    {publicKey && (
+                        <div className="w-full flex flex-col items-center gap-6">
+                            <div className="text-center w-full bg-red-950/30 py-6 rounded-xl border border-red-900/30">
+                                <div className="text-xs text-red-400/80 uppercase tracking-[0.2em] mb-2 font-bold">Total Liquidation Value</div>
+                                <div className="text-5xl md:text-6xl font-black text-red-500 tracking-tighter drop-shadow-[0_0_10px_rgba(239,68,68,0.5)]">
+                                    {valuing ? "..." : `$${totalValue.toFixed(2)}`}
+                                </div>
+                            </div>
+
+                            <div className="flex items-center justify-between w-full bg-red-900/20 px-4 py-3 rounded-xl border border-red-900/40">
+                                <label className="text-sm font-bold text-red-200 cursor-pointer" htmlFor="dump-sol">
+                                    Include SOL Balance? ({(solBalance / LAMPORTS_PER_SOL).toFixed(4)} SOL)
+                                </label>
+                                <Switch.Root
+                                    id="dump-sol"
+                                    checked={dumpSol}
+                                    onCheckedChange={setDumpSol}
+                                    className="w-[48px] h-[28px] bg-red-950 rounded-full relative shadow-inner focus:ring-2 focus:ring-red-500 data-[state=checked]:bg-red-600 outline-none cursor-pointer border border-red-900 transition-colors"
+                                >
+                                    <Switch.Thumb className="block w-[22px] h-[22px] bg-white rounded-full shadow-lg transition-transform duration-200 translate-x-0.5 will-change-transform data-[state=checked]:translate-x-[24px]" />
+                                </Switch.Root>
+                            </div>
+
+                            <PanicControl
+                                assets={assets}
+                                dumpSol={dumpSol}
+                                quotes={rawQuotes}
+                                totalValue={totalValue}
+                                onComplete={() => fetchData(publicKey.toBase58())}
+                            />
                         </div>
+                    )}
+                </div>
+
+                {/* Risk Assessment: Asset List Section */}
+                <div className="w-full bg-zinc-900/50 rounded-2xl overflow-hidden border border-zinc-800 backdrop-blur-sm mb-12">
+                    <div className="p-4 border-b border-zinc-800 text-[10px] uppercase tracking-[0.2em] text-zinc-500 flex justify-between font-bold bg-zinc-900/80">
+                        <span>Risk Assessment: Your Bags</span>
+                        <span>{assets.length} items detected</span>
+                    </div>
+                    <div className="p-2">
                         <AssetList assets={assets} loading={loading} />
                     </div>
                 </div>

@@ -1,0 +1,12 @@
+{
+    "manifest_version": 3,
+    "name": "Panic Sell",
+    "version": "1.0",
+    "description": "Liquidate your Solana portfolio. Save yourself.",
+    "action": {
+        "default_popup": "index.html"
+    },
+    "permissions": [
+        "storage"
+    ]
+}

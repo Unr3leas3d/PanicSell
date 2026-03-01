@@ -217,7 +217,7 @@ export default function PanicControl({ assets, dumpSol, quotes, totalValue, onCo
                                                 </div>
                                             ))}
                                             {running && (
-                                            <div className="text-red-500/50 animate-pulse mt-2">...</div>
+                                                <div className="text-red-500/50 animate-pulse mt-2">...</div>
                                             )}
                                         </motion.div>
                                     )}
